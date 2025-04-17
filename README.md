@@ -1,4 +1,3 @@
-```markdown
 # EnKoat Quote Portal & Performance Dashboard
 
 ## Summary
@@ -83,5 +82,3 @@ npm run dev      # opens at http://localhost:5173
 - First I'd like to improve the UI with more time, the quote submission form escpecially and the dashboard too.
 - We can add some authentication to it, that we each contractor will login and can manage their own quotes
 - Improve the code readability.
-
-```
