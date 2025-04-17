@@ -1,13 +1,13 @@
-const mongoose = require('mongoose');
+module.exports = (sequelize, DataTypes) => {
+  const Quote = sequelize.define('Quote', {
+    contractorName: DataTypes.STRING,
+    company: DataTypes.STRING,
+    roofSize: DataTypes.INTEGER,
+    roofType: DataTypes.STRING,
+    city: DataTypes.STRING,
+    state: DataTypes.STRING,
+    projectDate: DataTypes.DATE,
+  });
 
-const QuoteSchema = new mongoose.Schema({
-  contractorName: String,
-  company: String,
-  roofSize: Number,
-  roofType: String,
-  city: String,
-  state: String,
-  projectDate: Date
-});
-
-module.exports = mongoose.model('Quote', QuoteSchema);
+  return Quote;
+};
