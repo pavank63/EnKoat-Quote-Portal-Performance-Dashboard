@@ -4,6 +4,7 @@ import {
   BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, Tooltip, XAxis, YAxis, Legend, ResponsiveContainer
 } from 'recharts';
 import EnergyHeatmap from './EnergyHeatmap';
+import { saveAs } from 'file-saver';
 
 const Dashboard = () => {
   const [quotes, setQuotes] = useState([]);
@@ -62,6 +63,21 @@ const Dashboard = () => {
 
   const COLORS = ['#4F46E5', '#10B981', '#F59E0B', '#EF4444'];
 
+  const downloadCSV = () => {
+    const data = filtered.length ? filtered : quotes;
+    if (!data.length) return;
+  
+    const header = Object.keys(data[0]);
+    // 2) Build rows
+    const rows = data.map(row =>
+      header.map(field => `"${String(row[field]).replace(/"/g, '""')}"`).join(',')
+    );
+    const csvContent = [header.join(','), ...rows].join('\r\n');
+  
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    saveAs(blob, 'quotes_export.csv');
+  };
+
   return (
     <div className="container mx-auto px-4 py-10 min-h-screen bg-gradient-to-br from-slate-100 to-white py-10 px-4">
       <div className="max-w-5xl mx-auto">
@@ -102,9 +118,15 @@ const Dashboard = () => {
 
             <button
               onClick={() => setFilters({ state: '', roofType: '' })}
-              className="px-5 py-2 bg-gray-200 hover:bg-gray-300 text-sm font-semibold rounded-md mt-6 md:mt-0"
+              className="px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300"
             >
               Clear Filters
+            </button>
+            <button
+              onClick={downloadCSV}
+              className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+            >
+              Export CSV
             </button>
           </div>
 
