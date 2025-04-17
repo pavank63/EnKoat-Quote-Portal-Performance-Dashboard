@@ -63,42 +63,49 @@ const Dashboard = () => {
   const COLORS = ['#4F46E5', '#10B981', '#F59E0B', '#EF4444'];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-100 to-white py-10 px-4">
-      <div className="max-w-7xl mx-auto">
+    <div className="container mx-auto px-4 py-10 min-h-screen bg-gradient-to-br from-slate-100 to-white py-10 px-4">
+      <div className="max-w-5xl mx-auto">
         <h1 className="text-4xl font-bold text-blue-800 text-center mb-10">📊 Project Performance Dashboard</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Filters: Can filter by State, Rooftype*/}
-          <div className="bg-white p-4 mb-6 rounded-lg shadow flex flex-col md:flex-row gap-4 justify-center items-center">
-            <div>
-              <label className="mr-2 font-medium text-gray-700">State:</label>
+          <div className="bg-white p-4 mb-6 rounded-xl shadow-md flex flex-wrap gap-2 justify-around items-end ">
+            <div className="flex flex-col">
+              <label className="text-sm font-semibold text-gray-700 mb-1">Filter by State</label>
               <select
                 name="state"
                 value={filters.state}
                 onChange={handleFilterChange}
-                className="px-3 py-1 border rounded"
+                className="px-4 py-2 border border-gray-300 rounded-md bg-white shadow-sm focus:ring-2 focus:ring-blue-400"
               >
-                <option value="">All</option>
+                <option value="">All States</option>
                 {uniqueStates.map(state => (
                   <option key={state} value={state}>{state}</option>
                 ))}
               </select>
             </div>
 
-            <div>
-              <label className="mr-2 font-medium text-gray-700">Roof Type:</label>
+            <div className="flex flex-col">
+              <label className="text-sm font-semibold text-gray-700 mb-1">Filter by Roof Type</label>
               <select
                 name="roofType"
                 value={filters.roofType}
                 onChange={handleFilterChange}
-                className="px-3 py-1 border rounded"
+                className="px-4 py-2 border border-gray-300 rounded-md bg-white shadow-sm focus:ring-2 focus:ring-blue-400"
               >
-                <option value="">All</option>
+                <option value="">All Types</option>
                 {uniqueTypes.map(type => (
                   <option key={type} value={type}>{type}</option>
                 ))}
               </select>
             </div>
+
+            <button
+              onClick={() => setFilters({ state: '', roofType: '' })}
+              className="px-5 py-2 bg-gray-200 hover:bg-gray-300 text-sm font-semibold rounded-md mt-6 md:mt-0"
+            >
+              Clear Filters
+            </button>
           </div>
 
           {/* Bar Chart: Projects by State */}
@@ -157,6 +164,7 @@ const Dashboard = () => {
               </LineChart>
             </ResponsiveContainer>
           </div>
+          <EnergyHeatmap/>
         </div>
       </div>
     </div>
