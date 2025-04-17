@@ -1,5 +1,6 @@
 @tailwind base;
 @tailwind components;
+@tailwind utilities;
 
 /* — your global resets and typography — */
 @layer base {
@@ -14,12 +15,16 @@
 
   /* === Root Theme Variables === */
   :root {
+    color-scheme: light;
+    color: white; /* changed from slate-800 */
+    background-color: #090953; /* fallback dark bg for contrast */
     line-height: 1.6;
     font-weight: 400;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
   }
 
   /* === Links === */
@@ -29,7 +34,7 @@
     text-decoration: none;
   }
   a:hover {
-    color: #1d4ed8; /* Tailwind blue-700 */
+    color: #021a52; /* Tailwind blue-700 */
   }
 
   /* === Reset Body === */
@@ -85,5 +90,3 @@
     }
   }
 }
-
-@tailwind utilities;
